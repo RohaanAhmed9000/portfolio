@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohaan Ahmed | Purpose & Impact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Typography: Playfair Display (Serif) & Inter (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        obsidian: '#070709',
+                        alabaster: '#F9F9F6',
+                        accent: '#2c3e50',
+                        logic: '#38bdf8',    // Azure: algorithms, optics, physics
+                        empathy: '#fbbf24',  // Amber: human behavior, serious games
+                        insight: '#a78bfa'   // Amethyst: cognitive depth, research
+                    },
+                    transitionTimingFunction: {
+                        'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #070709;
+            color: #F9F9F6;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* Ambient Observer Spotlight */
+        #glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.05) 0%, rgba(167, 139, 250, 0.035) 30%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        /* Subtle Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Masked Text Reveal Animations with Descender Room */
+        .reveal-mask {
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: bottom;
+            padding-bottom: 0.45em;
+            margin-bottom: -0.45em;
+            padding-right: 0.25em;
+            margin-right: -0.25em;
+            padding-top: 0.15em;
+        }
+
+        .reveal-up {
+            display: inline-block;
+            transform: translateY(115%);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), opacity 1s ease-out;
+        }
+
+        .reveal-up.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .reveal-fade {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .reveal-fade.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Semantic Text Gradients */
+        .text-gradient-logic {
+            background: linear-gradient(to right, #38bdf8, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding-bottom: 0.15em;
+        }
+
+        .text-gradient-empathy {
+            background: linear-gradient(to right, #fbbf24, #f87171);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding-bottom: 0.15em;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070709; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+        /* Optimal reading measure that still yields on narrow screens */
+        .measure { max-width: min(65ch, 100%); }
+
+        /* Interactive Link Hover Effect */
+        .line-link {
+            position: relative;
+            display: inline-block;
+        }
+        .line-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom right;
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .line-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Canvas Styling */
+        canvas.lissajous-canvas {
+            filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.4));
+        }
+
+        /* Glass Cards */
+        .glass-panel {
+            background: rgba(18, 18, 24, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Seamless hover-to-play exhibition footage */
+        #kqStage video {
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), filter 0.7s ease-out;
+            transform: scale(1.02);
+            filter: saturate(0.85) brightness(0.82);
+        }
+        #kqStage.is-playing video {
+            transform: scale(1);
+            filter: saturate(1.05) brightness(1);
+        }
+        #kqStage .idle-veil {
+            transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #kqStage.is-playing .idle-veil { opacity: 0; }
+
+        /* One easing for every control, so buttons settle rather than snap.
+           Applied by class so the tab switcher cannot strip it. */
+        .smooth, .tab-btn, .freq-btn, button, a[href^="mailto"], .glass-panel {
+            transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+            transition-duration: 450ms;
+            transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .tab-btn:active, .freq-btn:active { transform: translateY(1px); }
+
+        /* Anchors clear the fixed nav when jumped to */
+        section[id], footer[id], article[id] { scroll-margin-top: 6rem; }
+
+        /* --- Modal entrances -------------------------------------------------
+           The overlay fades while the panel rises a little into place, so
+           opening reads as arrival rather than an appearance. */
+        #kindInspectorModal, #posterModal {
+            opacity: 0;
+            transition: opacity 380ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #kindInspectorModal.is-open, #posterModal.is-open { opacity: 1; }
+
+        #kindInspectorModal > div, #posterModal > div {
+            transform: translateY(18px) scale(0.982);
+            transition: transform 620ms cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: transform;
+        }
+        #kindInspectorModal.is-open > div, #posterModal.is-open > div {
+            transform: none;
+        }
+
+        /* Tab panels cross-fade instead of cutting */
+        #view-modules, #view-arch, #view-survey {
+            animation: panel-in 520ms cubic-bezier(0.19, 1, 0.22, 1) both;
+        }
+        @keyframes panel-in {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        /* Scrollable regions keep their momentum and stop chaining to the page */
+        #kindInspectorModal > div, #posterModal .poster-scroll {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+        }
+
+        /* Hint the compositor only where things actually move */
+        .reveal-fade, .reveal-up, #kqStage video { will-change: transform, opacity; }
+
+        @media (prefers-reduced-motion: reduce) {
+            #kindInspectorModal, #posterModal,
+            #kindInspectorModal > div, #posterModal > div { transition: none; }
+            #view-modules, #view-arch, #view-survey { animation: none; }
+        }
+
+        /* Focus visibility for keyboard users */
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+            outline: 2px solid #fbbf24;
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal-fade, .reveal-up { opacity: 1 !important; transform: none !important; transition: none !important; }
+            #kqStage video { transform: none; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-logic selection:text-obsidian relative">
+
+    <div class="noise-overlay"></div>
+    <div id="glow" class="hidden md:block"></div>
+
+    <!-- Navigation Header -->
+    <nav class="fixed top-0 w-full z-40 mix-blend-difference text-alabaster p-6 md:p-10 flex justify-between items-center transition-opacity duration-500" id="navbar">
+        <div class="font-serif italic text-xl tracking-tight">Rohaan Ahmed.</div>
+        <div class="text-xs font-medium uppercase tracking-widest space-x-8 hidden md:block">
+            <a href="#thought" class="line-link">Thought</a>
+            <a href="#work" class="line-link">Work</a>
+            <a href="#contact" class="line-link">Connect</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative min-h-screen flex items-center justify-center px-6 z-10 pt-20 pb-12">
+        <div class="max-w-6xl w-full mx-auto relative">
+
+            <div class="mb-6 flex flex-wrap items-center gap-3 md:gap-4">
+                <span class="reveal-mask"><span class="reveal-up text-[10px] font-bold tracking-[0.25em] uppercase text-logic">Computer Science</span></span>
+                <span class="reveal-mask"><span class="reveal-up delay-100 text-[10px] text-gray-600">&</span></span>
+                <span class="reveal-mask"><span class="reveal-up delay-200 text-[10px] font-bold tracking-[0.25em] uppercase text-empathy">Philosophy & Psychology</span></span>
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[1.14] tracking-tight text-alabaster mb-10 max-w-5xl">
+                <span class="reveal-mask"><span class="reveal-up">Seeking to <span class="italic text-gradient-empathy">design</span> human</span></span><br>
+                <span class="reveal-mask"><span class="reveal-up delay-100">interaction with technology,</span></span><br>
+                <span class="reveal-mask"><span class="reveal-up delay-200">directed by <span class="text-gradient-logic">purpose</span>.</span></span>
+            </h1>
+
+            <div class="reveal-mask mt-12">
+                <div class="reveal-up delay-300 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs md:text-sm font-medium tracking-widest uppercase text-gray-400">
+                    <span>Explore</span>
+                    <a href="#thought" class="line-link smooth hover:text-alabaster">thinking</a>
+                    <span class="text-gray-600">&</span>
+                    <a href="#kindquest" class="line-link smooth hover:text-alabaster">work</a>
+                    <span class="w-8 h-[1px] bg-gray-700 ml-1"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- VISION SECTION -->
+    <section id="thought" class="bg-alabaster text-obsidian py-24 md:py-36 px-6 relative z-20 rounded-t-3xl md:rounded-t-[3rem] transition-colors duration-1000">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 md:gap-16">
+
+            <div class="md:col-span-5 md:sticky top-36 self-start">
+                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight leading-tight reveal-fade relative inline-block">
+                    Technical work <br>with a clear <br><span class="italic text-gray-500 relative z-10">grounded</span> purpose.
+                    <div class="absolute bottom-2 left-0 w-full h-3 bg-empathy/20 -z-0 -rotate-2"></div>
+                </h2>
+            </div>
+
+            <div class="md:col-span-7 space-y-6 text-base md:text-lg font-light text-gray-800 leading-relaxed measure">
+                <p class="reveal-fade">
+                    I am a Computer Science student at Habib University looking to better understand and develop human interaction with technology. This interest is directed by Prophetic values and grounded in a parallel study of the Quran, philosophy, and psychology.
+                </p>
+                <p class="reveal-fade delay-100">
+                    That grounding has shaped how I build: designing closely around lived experience—such as modeling user behavior in an empathy-building serious game, or constructing a laser-optic setup to help students visualize sound.
+                </p>
+                <p class="reveal-fade delay-200 font-medium text-obsidian border-l-2 border-empathy pl-6 py-1">
+                    True engineering solves complex problems with structural rigor; true design ensures solutions are built in grounded realities with empathy.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- IMPACT (WORKS) SECTION -->
+    <section id="work" class="bg-obsidian text-alabaster py-24 md:py-36 px-6 relative z-20">
+        <div class="max-w-6xl mx-auto">
+
+            <div class="mb-16 md:mb-24 reveal-fade flex items-center gap-6">
+                <div>
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4">Works</h2>
+                    <span class="text-[10px] font-mono text-empathy uppercase tracking-widest block">Selected Impact & Research</span>
+                </div>
+                <div class="flex-grow h-[1px] bg-gradient-to-r from-gray-800 via-insight/20 to-transparent"></div>
+            </div>
+
+            <div class="space-y-32 md:space-y-40">
+
+                <!-- PROJECT 1: KindQuest (Clean Initial Experience + Interactive Disclosure) -->
+                <article id="kindquest" class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+                    <!-- Narrative Overview (Concise High-Level Experience) -->
+                    <div class="lg:col-span-5 min-w-0 reveal-fade space-y-6">
+                        <div class="flex flex-wrap gap-3 items-center text-[10px] font-bold uppercase tracking-widest text-empathy">
+                            <span>01</span>
+                            <div class="w-4 h-[1px] bg-empathy/50"></div>
+                            <span>Behavioral Simulation & Serious Gaming</span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-3xl md:text-4xl font-serif mb-2">Kind-Quest</h3>
+                            <p class="text-xs text-gray-400 font-mono uppercase tracking-wider">Inverted Assistive Framework · Down Syndrome Empathy Simulation</p>
+                        </div>
+
+                        <p class="text-sm text-gray-300 leading-relaxed measure">
+                            Kind-Quest inverts traditional assistive models by placing neurotypical players in collaborative scenarios with 'Ali' (an NPC with Down Syndrome). Players directly experience communication friction, expressive language delays, and motor pacing in a consequence-free environment.
+                        </p>
+
+                        <!-- Action Triggers for Progressive Inspection -->
+                        <div class="pt-2 flex flex-wrap gap-3 border-t border-gray-900">
+                            <button onclick="openKindInspector('modules')" class="px-5 py-3 rounded-xl bg-empathy text-obsidian text-xs font-bold font-mono tracking-wider hover:bg-amber-300 transition-all flex items-center gap-2 group shadow-lg shadow-empathy/10">
+                                <span>Inspect Technical Architecture</span>
+                                <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <!-- Exhibition Footage — hover to play, silent, seamless loop -->
+                    <div class="lg:col-span-7 min-w-0 reveal-fade delay-100 space-y-4">
+
+                        <div class="glass-panel rounded-2xl p-4 border border-gray-800 relative overflow-hidden shadow-2xl">
+
+                            <!-- Header Bar of Exhibition Laptop Screen -->
+                            <div class="flex justify-between items-center mb-3 pb-2.5 border-b border-gray-800/80">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+                                    <span class="ml-2 text-[10px] font-mono text-gray-400">Unity (C#) · Live build on the showcase floor</span>
+                                </div>
+                                <span class="text-[9px] font-mono text-empathy px-2 py-0.5 rounded bg-empathy/10 border border-empathy/30">Level 1: Communication</span>
+                            </div>
+
+                            <!-- Seamless silent player: unlabelled, plays on hover, focus, or tap -->
+                            <div id="kqStage" tabindex="0" role="button" aria-label="Play exhibition footage of Kind-Quest running on the showcase floor"
+                                 class="relative bg-black rounded-xl overflow-hidden border border-gray-900 aspect-[4/3] cursor-pointer">
+
+                                <video id="kqVideo" class="w-full h-full object-cover" muted loop playsinline preload="metadata"
+                                       poster="assets/kindquest-exhibit.jpg">
+                                    <source src="assets/kindquest-exhibit.webm" type="video/webm">
+                                    <source src="assets/kindquest-exhibit.mp4" type="video/mp4">
+                                </video>
+
+                                <!-- Idle state: dissolves the moment playback begins -->
+                                <div class="idle-veil absolute inset-0 pointer-events-none bg-gradient-to-t from-obsidian/70 via-transparent to-obsidian/30">
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <span class="flex items-center justify-center w-14 h-14 rounded-full bg-obsidian/60 border border-empathy/50 backdrop-blur-sm">
+                                            <svg class="w-5 h-5 ml-0.5 text-empathy" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 flex flex-wrap gap-2 justify-between items-center text-[10px] font-mono text-gray-500">
+                                <span>Habib University FYP Showcase 2026 · In partnership with KDSP</span>
+                                <button onclick="openKindInspector('modules')" class="text-empathy hover:text-amber-300 transition-colors">Technical inspection ➔</button>
+                            </div>
+
+                        </div>
+
+                        <!-- Highlighted FYP Poster Preview Card -->
+                        <div onclick="openPosterModal()" class="glass-panel p-4 rounded-xl border border-gray-800 hover:border-empathy/50 transition-all cursor-pointer flex items-center justify-between gap-4 group">
+                            <div class="flex items-center gap-4 min-w-0">
+                                <div class="w-12 h-16 rounded overflow-hidden bg-gray-900 border border-gray-700 group-hover:border-empathy transition-colors shrink-0">
+                                    <img src="assets/kindquest-poster.jpg" alt="" class="w-full h-full object-cover object-top">
+                                </div>
+                                <div class="min-w-0">
+                                    <h4 class="text-xs font-bold text-alabaster group-hover:text-empathy transition-colors">FYP Research Poster</h4>
+                                    <p class="text-[10px] text-gray-400 font-mono truncate">Problem Statement, Flowchart, Tech Stack & Results</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-empathy group-hover:translate-x-1 transition-transform shrink-0">View Full Poster ➔</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- PROJECT 2: Seeing Sound with Light -->
+                <article class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+                    <!-- Visual Interactive Preview First -->
+                    <div class="lg:col-span-7 min-w-0 bg-[#0c0c0e] rounded-2xl border border-gray-800 p-5 flex flex-col justify-between min-h-[440px] reveal-fade">
+
+                        <!-- Header Bar -->
+                        <div class="flex flex-wrap gap-2 justify-between items-center mb-3 pb-2 border-b border-gray-900">
+                            <span class="text-[10px] font-mono text-logic uppercase">What the laser draws</span>
+                            <span id="freqDisplay" class="text-[10px] font-mono text-gray-400">155 Hz — the balloon is in step</span>
+                        </div>
+
+                        <!-- Dynamic Lissajous Canvas -->
+                        <div class="relative my-auto flex flex-col items-center justify-center w-full">
+                            <canvas id="lissajousCanvas" class="lissajous-canvas w-full max-w-[380px] h-[200px]"></canvas>
+                            <p class="text-[10px] text-gray-500 mt-2 text-center max-w-[42ch] leading-relaxed">
+                                One moving dot of light. Your eye holds the trail, so its path shows up as a shape.
+                            </p>
+                        </div>
+
+                        <!-- Interactive Frequency Controls -->
+                        <div class="space-y-2 mt-4 pt-3 border-t border-gray-900">
+                            <div class="flex flex-wrap gap-2 justify-between text-[9px] font-mono text-gray-400">
+                                <span>Play a tone:</span>
+                                <span id="lissajousPhase">A circle</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="setLissajous(155, 1.57)" id="freq-155" class="freq-btn py-2 rounded bg-slate-900 border border-logic/40 text-[10px] font-mono text-logic hover:bg-logic hover:text-obsidian font-bold">155 Hz</button>
+                                <button onclick="setLissajous(150, 0.78)" id="freq-150" class="freq-btn py-2 rounded bg-slate-900 border border-gray-800 text-[10px] font-mono text-gray-300 hover:border-logic hover:text-logic">150 Hz</button>
+                                <button onclick="setLissajous(250, 2.35)" id="freq-250" class="freq-btn py-2 rounded bg-slate-900 border border-gray-800 text-[10px] font-mono text-gray-300 hover:border-logic hover:text-logic">250 Hz</button>
+                            </div>
+                        </div>
+
+                        <!-- The setup, in order -->
+                        <div class="mt-3 p-2.5 rounded bg-obsidian border border-gray-900 text-[9px] font-mono text-gray-500 text-center">
+                            Speaker → balloon stretched over it → mirror on the balloon → laser → screen
+                        </div>
+                    </div>
+
+                    <!-- Concise Narrative Breakdown -->
+                    <div class="lg:col-span-5 min-w-0 reveal-fade delay-100 space-y-6">
+                        <div class="flex flex-wrap gap-3 items-center text-[10px] font-bold uppercase tracking-widest text-logic">
+                            <span>02</span>
+                            <div class="w-4 h-[1px] bg-logic/50"></div>
+                            <span>Physics & Optics Research</span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-3xl md:text-4xl font-serif mb-2">Seeing Sound with Light</h3>
+                            <p class="text-xs text-gray-400 font-mono uppercase tracking-wider">Undergraduate Research · Sound, Made Visible</p>
+                        </div>
+
+                        <p class="text-sm text-gray-300 leading-relaxed measure">
+                            Led a 10-week research project (<em>Summer-Tehqiq</em>) to make sound into something you can look at. A balloon is stretched over a speaker with a small mirror glued to its centre, and a laser pointed at that mirror throws its reflection onto a screen in a dark room. Play a tone, the balloon moves, and the dot of light begins tracing a shape.
+                        </p>
+
+                        <div class="border-l-2 border-logic pl-4 space-y-2">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-alabaster block">What we found</span>
+                            <p class="text-xs text-gray-300 leading-relaxed">
+                                At most tones the shape stays small. At certain ones it opens right up — the balloon and the tone are moving in step. Eight of those tones sit between 78 and 202 Hz. At 155 Hz the light draws a clean circle; at 150 Hz, a tilted oval. Those are the shapes two crossing waves are known to make, which is how a picture on a screen can tell you what the sound was doing.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- KINDQUEST TECHNICAL INSPECTION DRAWER / MODAL -->
+    <div id="kindInspectorModal" class="fixed inset-0 z-50 bg-obsidian/90 backdrop-blur-xl hidden flex items-center justify-center p-4 md:p-8 transition-opacity duration-300" role="dialog" aria-modal="true" aria-label="Kind-Quest technical inspector">
+        <div class="bg-[#0e0e12] border border-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto flex flex-col justify-between shadow-2xl">
+
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-[#0e0e12]/95 backdrop-blur border-b border-gray-800 p-5 flex flex-wrap gap-3 justify-between items-center z-10">
+                <div>
+                    <span class="text-[10px] font-mono text-empathy uppercase tracking-wider block">KindQuest Technical Inspector</span>
+                    <h3 class="text-xl font-serif text-alabaster">Core Modules, Architecture & Study Results</h3>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <!-- Tab Switcher -->
+                    <div class="flex gap-1 bg-obsidian p-1 rounded-lg border border-gray-800 text-[10px] font-mono">
+                        <button onclick="switchKindView('modules')" id="tab-modules" class="tab-btn px-3 py-1.5 rounded bg-empathy text-obsidian font-bold">Modules</button>
+                        <button onclick="switchKindView('arch')" id="tab-arch" class="tab-btn px-3 py-1.5 rounded text-gray-400 hover:text-alabaster">Architecture</button>
+                        <button onclick="switchKindView('survey')" id="tab-survey" class="tab-btn px-3 py-1.5 rounded text-gray-400 hover:text-alabaster">Results</button>
+                    </div>
+
+                    <!-- Close Button -->
+                    <button onclick="closeKindInspector()" aria-label="Close" class="p-2 rounded-lg bg-gray-900 text-gray-400 hover:text-alabaster hover:bg-gray-800 transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Content Views -->
+            <div class="p-6 space-y-6 my-auto">
+
+                <!-- VIEW 1: Core Modules & The Empathy Journey -->
+                <div id="view-modules" class="space-y-4">
+
+                    <!-- Each module carries the colour of the stage it drives below -->
+                    <div class="grid sm:grid-cols-3 gap-3">
+                        <div class="bg-obsidian p-4 rounded-xl border border-gray-800 border-t-2 border-t-empathy smooth hover:border-empathy/40">
+                            <span class="text-[10px] font-mono text-empathy uppercase block mb-2">Communication</span>
+                            <p class="text-xs text-gray-300 leading-relaxed">A dialogue system through which the player has to understand and work with Ali, rather than around him.</p>
+                        </div>
+                        <div class="bg-obsidian p-4 rounded-xl border border-gray-800 border-t-2 border-t-insight smooth hover:border-insight/40">
+                            <span class="text-[10px] font-mono text-insight uppercase block mb-2">Environmental Accommodation</span>
+                            <p class="text-xs text-gray-300 leading-relaxed">Players modify barriers in the environment so that Ali can succeed at the task in front of him.</p>
+                        </div>
+                        <div class="bg-obsidian p-4 rounded-xl border border-gray-800 border-t-2 border-t-logic smooth hover:border-logic/40">
+                            <span class="text-[10px] font-mono text-logic uppercase block mb-2">Person-Driven Representation</span>
+                            <p class="text-xs text-gray-300 leading-relaxed">Ali's behaviour is driven by a probabilistic model informed by real-world Down Syndrome datasets.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-obsidian p-4 rounded-xl border border-gray-800">
+                        <div class="flex flex-wrap justify-between gap-2 text-[11px] font-mono text-empathy mb-3">
+                            <span>The Empathy Journey — narrative spine</span>
+                            <span class="text-gray-500">Empathy meter governs the ending</span>
+                        </div>
+                        <svg viewBox="0 0 400 120" class="w-full h-auto rounded bg-[#070709] border border-gray-900" role="img" aria-label="Flow from start through three playable stages to the final outcome, with an empathy meter running underneath.">
+                            <defs>
+                                <marker id="arw" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                                    <path d="M0,0 L6,3 L0,6 z" fill="#4b5563"/>
+                                </marker>
+                                <linearGradient id="meter" x1="0" x2="1">
+                                    <stop offset="0%" stop-color="#f87171"/>
+                                    <stop offset="50%" stop-color="#fbbf24"/>
+                                    <stop offset="100%" stop-color="#34d399"/>
+                                </linearGradient>
+                            </defs>
+
+                            <rect x="6" y="26" width="60" height="34" rx="5" fill="#121218" stroke="#4b5563" stroke-width="0.8"/>
+                            <text x="36" y="41" font-size="7.5" fill="#F9F9F6" text-anchor="middle" font-family="sans-serif">Start &amp; Menu</text>
+                            <text x="36" y="52" font-size="6.2" fill="#6b7280" text-anchor="middle" font-family="sans-serif">Cutscene: bullying</text>
+
+                            <line x1="66" y1="43" x2="76" y2="43" stroke="#4b5563" stroke-width="1" marker-end="url(#arw)"/>
+
+                            <rect x="78" y="26" width="70" height="34" rx="5" fill="#121218" stroke="#fbbf24" stroke-width="0.9"/>
+                            <text x="113" y="41" font-size="7.5" fill="#fbbf24" text-anchor="middle" font-family="sans-serif">Dimension Maze</text>
+                            <text x="113" y="52" font-size="6.2" fill="#9ca3af" text-anchor="middle" font-family="sans-serif">Follow Ali's directions</text>
+
+                            <line x1="148" y1="43" x2="158" y2="43" stroke="#4b5563" stroke-width="1" marker-end="url(#arw)"/>
+
+                            <rect x="160" y="26" width="70" height="34" rx="5" fill="#121218" stroke="#a78bfa" stroke-width="0.9"/>
+                            <text x="195" y="41" font-size="7.5" fill="#a78bfa" text-anchor="middle" font-family="sans-serif">Open Portal</text>
+                            <text x="195" y="52" font-size="6.2" fill="#9ca3af" text-anchor="middle" font-family="sans-serif">Teach &amp; collect with Ali</text>
+
+                            <line x1="230" y1="43" x2="240" y2="43" stroke="#4b5563" stroke-width="1" marker-end="url(#arw)"/>
+
+                            <rect x="242" y="26" width="70" height="34" rx="5" fill="#121218" stroke="#38bdf8" stroke-width="0.9"/>
+                            <text x="277" y="41" font-size="7.5" fill="#38bdf8" text-anchor="middle" font-family="sans-serif">Ball Sorting</text>
+                            <text x="277" y="52" font-size="6.2" fill="#9ca3af" text-anchor="middle" font-family="sans-serif">Ali outperforms player</text>
+
+                            <line x1="312" y1="43" x2="322" y2="43" stroke="#4b5563" stroke-width="1" marker-end="url(#arw)"/>
+                            <rect x="324" y="26" width="70" height="34" rx="5" fill="#121218" stroke="#F9F9F6" stroke-width="0.9"/>
+                            <text x="359" y="41" font-size="7.5" fill="#F9F9F6" text-anchor="middle" font-family="sans-serif">Apology &amp; Rescue</text>
+                            <text x="359" y="52" font-size="6.2" fill="#6b7280" text-anchor="middle" font-family="sans-serif">Player replays</text>
+
+                            <!-- The meter keeps its own scale; the descriptors stay neutral so the two read apart -->
+                            <rect x="8" y="82" width="386" height="7" rx="3.5" fill="url(#meter)" opacity="0.85"/>
+                            <text x="8" y="102" font-size="6.5" fill="#9ca3af" font-family="sans-serif">Low empathy</text>
+                            <text x="201" y="102" font-size="6.5" fill="#6b7280" text-anchor="middle" font-family="sans-serif">Empathy meter accumulates across every choice</text>
+                            <text x="394" y="102" font-size="6.5" fill="#9ca3af" text-anchor="end" font-family="sans-serif">High empathy</text>
+                        </svg>
+                        <p class="text-xs text-gray-400 mt-2">Ali's performance in the closing task is influenced by the empathy the player has shown, so the ending is earned rather than awarded.</p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-[2fr_1fr] gap-3">
+                        <div class="bg-obsidian p-4 rounded-xl border border-gray-800">
+                            <span class="text-[11px] font-mono text-empathy block mb-2 uppercase">Grounding</span>
+                            <p class="text-xs text-gray-300 leading-relaxed">
+                                Reviewed under the advice of an expert with experience in catering to students with Down Syndrome, and developed in partnership with KDSP. Every interaction parameter traces to peer-reviewed literature rather than to stereotype.
+                            </p>
+                        </div>
+                        <div class="bg-obsidian p-4 rounded-xl border border-gray-800">
+                            <span class="text-[11px] font-mono text-empathy block mb-2 uppercase">Tech Stack</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded bg-gray-900 border border-gray-800 text-[10px] font-mono text-gray-300">Unity</span>
+                                <span class="px-2.5 py-1 rounded bg-gray-900 border border-gray-800 text-[10px] font-mono text-gray-300">C#</span>
+                                <span class="px-2.5 py-1 rounded bg-gray-900 border border-gray-800 text-[10px] font-mono text-gray-300">Git</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW 2: System Architecture Diagram -->
+                <div id="view-arch" class="hidden space-y-4">
+                    <div class="bg-obsidian p-4 rounded-xl border border-gray-800">
+                        <span class="text-[11px] font-mono text-empathy block mb-3 uppercase">System Architecture &amp; Data Flow</span>
+                        <svg viewBox="0 0 400 212" class="w-full h-auto rounded bg-[#070709] p-2" role="img" aria-label="The user interface feeds game logic and state. Input system to game logic and state to output system, left to right. Unity controllers drive input, the save and load manager exchanges state and writes to local prefs, and rendering draws the output.">
+                            <defs>
+                                <marker id="arw2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                                    <path d="M0,0 L6,3 L0,6 z" fill="#6b7280"/>
+                                </marker>
+                                <marker id="arw2s" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto">
+                                    <path d="M6,0 L0,3 L6,6 z" fill="#6b7280"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Entry point -->
+                            <rect x="152" y="8" width="96" height="26" rx="6" fill="#14141b" stroke="#6b7280" stroke-width="0.9"/>
+                            <text x="200" y="25" font-size="8.5" fill="#F9F9F6" text-anchor="middle" font-family="sans-serif">User Interface</text>
+                            <line x1="200" y1="34" x2="200" y2="50" stroke="#6b7280" stroke-width="1.1" marker-end="url(#arw2)"/>
+
+                            <!-- Primary pipeline -->
+                            <rect x="18" y="60" width="98" height="40" rx="6" fill="#14141b" stroke="#38bdf8" stroke-width="1.1"/>
+                            <text x="67" y="78" font-size="8.5" fill="#F9F9F6" text-anchor="middle" font-family="sans-serif" font-weight="bold">Input System</text>
+                            <text x="67" y="90" font-size="6.8" fill="#38bdf8" text-anchor="middle" font-family="sans-serif">Dialogue &amp; pacing</text>
+
+                            <rect x="136" y="52" width="128" height="78" rx="7" fill="#14141b" stroke="#fbbf24" stroke-width="1.2"/>
+                            <text x="200" y="70" font-size="9" fill="#fbbf24" text-anchor="middle" font-family="sans-serif" font-weight="bold">Game Logic &amp; State</text>
+                            <rect x="148" y="78" width="104" height="20" rx="4" fill="#0b0b10" stroke="#a78bfa" stroke-width="0.6"/>
+                            <text x="200" y="91" font-size="7" fill="#a78bfa" text-anchor="middle" font-family="sans-serif">Probabilistic NPC model</text>
+                            <rect x="148" y="102" width="104" height="20" rx="4" fill="#0b0b10" stroke="#fbbf24" stroke-width="0.6"/>
+                            <text x="200" y="115" font-size="7" fill="#fbbf24" text-anchor="middle" font-family="sans-serif">Empathy meter</text>
+
+                            <rect x="284" y="60" width="98" height="40" rx="6" fill="#14141b" stroke="#a78bfa" stroke-width="1.1"/>
+                            <text x="333" y="78" font-size="8.5" fill="#F9F9F6" text-anchor="middle" font-family="sans-serif" font-weight="bold">Output System</text>
+                            <text x="333" y="90" font-size="6.8" fill="#a78bfa" text-anchor="middle" font-family="sans-serif">Response &amp; feedback</text>
+
+                            <line x1="116" y1="80" x2="134" y2="80" stroke="#6b7280" stroke-width="1.2" marker-end="url(#arw2)"/>
+                            <line x1="264" y1="80" x2="282" y2="80" stroke="#6b7280" stroke-width="1.2" marker-end="url(#arw2)"/>
+
+                            <!-- Supporting services -->
+                            <rect x="18" y="150" width="98" height="26" rx="5" fill="#101017" stroke="#374151" stroke-width="0.9"/>
+                            <text x="67" y="167" font-size="7.5" fill="#9ca3af" text-anchor="middle" font-family="sans-serif">Unity Controllers</text>
+                            <line x1="67" y1="150" x2="67" y2="104" stroke="#4b5563" stroke-width="1" marker-end="url(#arw2)"/>
+
+                            <rect x="151" y="150" width="98" height="26" rx="5" fill="#101017" stroke="#374151" stroke-width="0.9"/>
+                            <text x="200" y="167" font-size="7.5" fill="#9ca3af" text-anchor="middle" font-family="sans-serif">Save / Load Manager</text>
+                            <line x1="200" y1="148" x2="200" y2="134" stroke="#4b5563" stroke-width="1" marker-end="url(#arw2)" marker-start="url(#arw2s)"/>
+
+                            <rect x="284" y="150" width="98" height="26" rx="5" fill="#101017" stroke="#374151" stroke-width="0.9"/>
+                            <text x="333" y="167" font-size="7.5" fill="#9ca3af" text-anchor="middle" font-family="sans-serif">Rendering</text>
+                            <line x1="333" y1="104" x2="333" y2="148" stroke="#4b5563" stroke-width="1" marker-end="url(#arw2)"/>
+
+                            <!-- Persistence -->
+                            <line x1="200" y1="176" x2="200" y2="186" stroke="#4b5563" stroke-width="1" marker-end="url(#arw2)"/>
+                            <rect x="151" y="188" width="98" height="20" rx="5" fill="#0b0b10" stroke="#38bdf8" stroke-width="0.8"/>
+                            <text x="200" y="201" font-size="7" fill="#38bdf8" text-anchor="middle" font-family="sans-serif">Local Data (Prefs)</text>
+                        </svg>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Profile parameters are written to local preferences on the player's device at the current stage.</p>
+                    </div>
+                </div>
+
+                <!-- VIEW 3: Empirical Survey Results -->
+                <div id="view-survey" class="hidden space-y-4">
+                    <div class="bg-obsidian p-4 rounded-xl border border-gray-800 space-y-4">
+                        <span class="text-[11px] font-mono text-empathy block uppercase">Pre- and post-game questionnaire · N = 7</span>
+
+                        <div>
+                            <div class="flex justify-between gap-3 text-xs text-gray-300 font-mono mb-1">
+                                <span>Awareness of communication challenges</span>
+                                <span class="text-empathy font-bold shrink-0">100% recognised</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-900 rounded-full overflow-hidden">
+                                <div class="h-full bg-empathy w-full rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between gap-3 text-xs text-gray-300 font-mono mb-1">
+                                <span>Pro-inclusion attitudes (society should adapt)</span>
+                                <span class="text-empathy font-bold shrink-0">71% agreed</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-900 rounded-full overflow-hidden">
+                                <div class="h-full bg-empathy w-[71%] rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between gap-3 text-xs text-gray-300 font-mono mb-1">
+                                <span>Belief in meaningful, fulfilling lives</span>
+                                <span class="text-empathy font-bold shrink-0">71% agreed</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-900 rounded-full overflow-hidden">
+                                <div class="h-full bg-empathy w-[71%] rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-obsidian p-4 rounded-xl border border-gray-800 border-l-2 border-l-insight">
+                        <span class="text-[11px] font-mono text-insight block mb-2 uppercase">Conclusion</span>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Kind-Quest successfully shifts neurotypical players toward more empathetic and inclusive attitudes, with participants showing better awareness of communication challenges and a realisation for societal inclusion. Further development of the adaptive NPC system and a larger-scale evaluation are the primary next steps.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-gray-800 text-center text-[10px] font-mono text-gray-500">
+                <span>Press ESC or click close to return to portfolio view</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FULL RESEARCH POSTER MODAL -->
+    <div id="posterModal" class="fixed inset-0 z-50 bg-obsidian/95 backdrop-blur-2xl hidden flex-col items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Kind-Quest research poster">
+        <div class="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center">
+
+            <div class="w-full flex flex-wrap gap-3 justify-between items-center mb-3">
+                <span class="text-xs font-mono text-empathy uppercase">Habib University FYP Research Poster — KindQuest</span>
+                <div class="flex items-center gap-2">
+                    <a href="assets/kindquest-poster.jpg" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-gray-800 text-alabaster text-xs font-mono hover:bg-gray-700 transition">Open full size</a>
+                    <button onclick="closePosterModal()" class="px-3 py-1.5 rounded-lg bg-gray-800 text-alabaster text-xs font-mono hover:bg-empathy hover:text-obsidian transition">Close (ESC)</button>
+                </div>
+            </div>
+
+            <!-- Poster Display -->
+            <div class="poster-scroll w-full overflow-y-auto rounded-xl border border-gray-800 bg-obsidian p-2 shadow-2xl max-h-[82vh]">
+                <img src="assets/kindquest-poster.jpg" alt="Kind-Quest research poster: problem statement, methodology, game experience, game flow, system diagram, tech stack, testing and results, and conclusion." class="w-full h-auto rounded">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER SECTION -->
+    <footer id="contact" class="bg-obsidian text-alabaster py-24 md:py-36 px-6 border-t border-gray-900 relative z-20 overflow-hidden">
+
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-insight/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="font-serif text-4xl sm:text-5xl lg:text-7xl mb-6 reveal-fade">Let's build with purpose.</h2>
+            <p class="text-gray-400 mb-12 measure mx-auto reveal-fade delay-100 text-sm md:text-base leading-relaxed">
+                Seeking opportunities where rigorous systems for development serve a clear and considered purpose. Based in Karachi.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-5 md:gap-6 reveal-fade delay-200">
+                <a href="mailto:rohaan9000.ahmed@gmail.com" class="group relative px-8 py-4 bg-alabaster text-obsidian rounded-full font-medium text-xs md:text-sm overflow-hidden border border-alabaster w-full sm:w-auto">
+                    <span class="relative z-10 group-hover:text-alabaster transition-colors duration-300">rohaan9000.ahmed@gmail.com</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-logic to-insight transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out-expo"></div>
+                </a>
+                <a href="https://linkedin.com/in/rohaan-ahmed-80abb4275" target="_blank" rel="noopener" class="text-xs md:text-sm font-medium text-gray-400 hover:text-alabaster line-link pb-1 transition-colors">LinkedIn Profile</a>
+            </div>
+
+            <div class="mt-24 text-[10px] font-bold tracking-widest uppercase text-gray-600 flex flex-wrap justify-center gap-4 items-center">
+                <span>&copy; 2026 Rohaan Ahmed</span>
+                <div class="w-1 h-1 rounded-full bg-gray-600"></div>
+                <span class="text-insight">Grounded in Philosophy & Psychology</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // 1. Observer Effect Spotlight
+        const glow = document.getElementById('glow');
+        let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+        let glowX = mouseX, glowY = mouseY;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateGlow() {
+            glowX += (mouseX - glowX) * 0.08;
+            glowY += (mouseY - glowY) * 0.08;
+            if (glow) {
+                glow.style.left = `${glowX}px`;
+                glow.style.top = `${glowY}px`;
+            }
+            requestAnimationFrame(animateGlow);
+        }
+        if (window.matchMedia("(min-width: 768px)").matches && !reduceMotion) {
+            animateGlow();
+        }
+
+        // 2. Scroll Reveals
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('header .reveal-up').forEach(el => el.classList.add('active'));
+            }, 100);
+
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+            document.querySelectorAll('.reveal-fade, .reveal-up:not(header .reveal-up)').forEach(el => {
+                revealOnScroll.observe(el);
+            });
+
+            initLissajousCanvas();
+            initExhibitPlayer();
+        });
+
+        // 3. Exhibition footage — plays on hover or focus, no controls, no audio
+        function initExhibitPlayer() {
+            const stage = document.getElementById('kqStage');
+            const video = document.getElementById('kqVideo');
+            if (!stage || !video) return;
+
+            const play = () => {
+                const attempt = video.play();
+                if (attempt && attempt.catch) attempt.catch(() => {});
+                stage.classList.add('is-playing');
+            };
+            const stop = () => {
+                video.pause();
+                stage.classList.remove('is-playing');
+            };
+
+            // The card shifts while its reveal animation runs, which can fire a
+            // mouseleave the pointer never actually caused. Confirm before stopping.
+            const stopIfLeft = () => {
+                setTimeout(() => { if (!stage.matches(':hover')) stop(); }, 120);
+            };
+
+            stage.addEventListener('mouseenter', play);
+            stage.addEventListener('mouseleave', stopIfLeft);
+            stage.addEventListener('focus', play);
+            stage.addEventListener('blur', stopIfLeft);
+
+            // Touch devices have no hover: tapping toggles playback.
+            stage.addEventListener('click', () => {
+                video.paused ? play() : stop();
+            });
+            stage.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    video.paused ? play() : stop();
+                }
+            });
+
+            // Never leave it running off-screen — but a late callback from a
+            // scroll must not cut playback while the pointer is still on it.
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) stopIfLeft();
+                    });
+                }, { threshold: 0 }).observe(stage);
+            }
+        }
+
+        // 4. Eased in-page travel
+        //    Native smooth scrolling arrives abruptly; this decelerates into
+        //    the destination and scales its duration to the distance covered.
+        const NAV_OFFSET = 96;
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function scrollToTarget(target) {
+            const destination = Math.max(
+                0,
+                Math.min(
+                    target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET,
+                    document.documentElement.scrollHeight - window.innerHeight
+                )
+            );
+            const start = window.scrollY;
+            const distance = destination - start;
+            if (Math.abs(distance) < 2) return;
+
+            if (reduceMotion) { window.scrollTo(0, destination); return; }
+
+            // Long journeys take longer, but never so long that they drag.
+            const duration = Math.min(1500, Math.max(700, Math.abs(distance) * 0.7));
+            const began = performance.now();
+
+            (function step(now) {
+                const progress = Math.min(1, (now - began) / duration);
+                window.scrollTo(0, start + distance * easeInOutCubic(progress));
+                if (progress < 1) requestAnimationFrame(step);
+            })(began);
+        }
+
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href^="#"]');
+            if (!link) return;
+            const id = link.getAttribute('href').slice(1);
+            const target = id && document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            scrollToTarget(target);
+            history.replaceState(null, '', '#' + id);
+        });
+
+        // 5. KindQuest Inspector Modal Controls
+        function lockScroll(on) {
+            document.body.style.overflow = on ? 'hidden' : '';
+        }
+
+        function openKindInspector(defaultTab = 'modules') {
+            const modal = document.getElementById('kindInspectorModal');
+            modal.classList.remove('hidden');
+            switchKindView(defaultTab);
+            requestAnimationFrame(() => modal.classList.add('is-open'));
+            lockScroll(true);
+        }
+
+        function closeKindInspector() {
+            const modal = document.getElementById('kindInspectorModal');
+            if (modal.classList.contains('hidden')) return;
+            modal.classList.remove('is-open');
+            const finish = () => {
+                modal.classList.add('hidden');
+                if (document.getElementById('posterModal').classList.contains('hidden')) lockScroll(false);
+            };
+            reduceMotion ? finish() : setTimeout(finish, 380);
+        }
+
+        function switchKindView(viewName) {
+            const views = ['modules', 'arch', 'survey'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                const tab = document.getElementById(`tab-${v}`);
+                if (v === viewName) {
+                    el.classList.remove('hidden');
+                    el.style.animation = 'none';
+                    void el.offsetWidth;          // restart the entrance
+                    el.style.animation = '';
+                    tab.className = 'tab-btn px-3 py-1.5 rounded bg-empathy text-obsidian font-bold';
+                } else {
+                    el.classList.add('hidden');
+                    tab.className = 'tab-btn px-3 py-1.5 rounded text-gray-400 hover:text-alabaster';
+                }
+            });
+        }
+
+        // 6. Research Poster Modal Controls
+        function openPosterModal() {
+            const m = document.getElementById('posterModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+            requestAnimationFrame(() => m.classList.add('is-open'));
+            lockScroll(true);
+        }
+
+        function closePosterModal() {
+            const m = document.getElementById('posterModal');
+            if (m.classList.contains('hidden')) return;
+            m.classList.remove('is-open');
+            const finish = () => {
+                m.classList.add('hidden');
+                m.classList.remove('flex');
+                if (document.getElementById('kindInspectorModal').classList.contains('hidden')) lockScroll(false);
+            };
+            reduceMotion ? finish() : setTimeout(finish, 380);
+        }
+
+        // Keyboard ESC handler
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeKindInspector();
+                closePosterModal();
+            }
+        });
+
+        // Click the backdrop to dismiss
+        document.getElementById('posterModal').addEventListener('click', (e) => {
+            if (e.target.id === 'posterModal') closePosterModal();
+        });
+        document.getElementById('kindInspectorModal').addEventListener('click', (e) => {
+            if (e.target.id === 'kindInspectorModal') closeKindInspector();
+        });
+
+        // 7. Lissajous Canvas Simulation
+        let lissajousFreq = 155;
+        let lissajousPhaseVal = Math.PI / 2;
+        let canvas, ctx, timeStep = 0, canvasVisible = true, cssW = 300, cssH = 200;
+
+        function sizeCanvas() {
+            if (!canvas) return;
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const rect = canvas.getBoundingClientRect();
+            cssW = rect.width || 300;
+            cssH = rect.height || 200;
+            canvas.width = Math.round(cssW * dpr);
+            canvas.height = Math.round(cssH * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function initLissajousCanvas() {
+            canvas = document.getElementById('lissajousCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            sizeCanvas();
+            window.addEventListener('resize', sizeCanvas);
+
+            if ('IntersectionObserver' in window) {
+                canvasVisible = false;
+                new IntersectionObserver((entries) => {
+                    canvasVisible = entries[0].isIntersecting;
+                }, { rootMargin: '120px' }).observe(canvas);
+            }
+            drawLissajous();
+        }
+
+        function setLissajous(freq, phase) {
+            lissajousFreq = freq;
+            lissajousPhaseVal = phase;
+            const freqDisp = document.getElementById('freqDisplay');
+            const phaseDisp = document.getElementById('lissajousPhase');
+
+            if (freq === 155) {
+                freqDisp.innerText = "155 Hz — the balloon is in step";
+                phaseDisp.innerText = "A circle";
+            } else if (freq === 150) {
+                freqDisp.innerText = "150 Hz — the balloon is in step";
+                phaseDisp.innerText = "A tilted oval";
+            } else {
+                freqDisp.innerText = "250 Hz — an odd one out";
+                phaseDisp.innerText = "A drifting loop, seen once";
+            }
+
+            // Reflect the active tone in the controls
+            [155, 150, 250].forEach(f => {
+                const btn = document.getElementById('freq-' + f);
+                if (!btn) return;
+                btn.className = (f === freq)
+                    ? 'freq-btn py-2 rounded bg-slate-900 border border-logic/40 text-[10px] font-mono text-logic hover:bg-logic hover:text-obsidian font-bold'
+                    : 'freq-btn py-2 rounded bg-slate-900 border border-gray-800 text-[10px] font-mono text-gray-300 hover:border-logic hover:text-logic';
+            });
+        }
+
+        function drawLissajous() {
+            if (!ctx) return;
+            requestAnimationFrame(drawLissajous);
+            if (!canvasVisible) return;
+
+            ctx.clearRect(0, 0, cssW, cssH);
+
+            ctx.beginPath();
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 2;
+            ctx.lineJoin = 'round';
+
+            const cx = cssW / 2;
+            const cy = cssH / 2;
+            const rx = Math.min(cssW * 0.28, 90);
+            const ry = Math.min(cssH * 0.38, 70);
+
+            if (!reduceMotion) timeStep += 0.02;
+            const numPoints = lissajousFreq === 250 ? 700 : 350;
+            const w1 = 1;
+            const w2 = lissajousFreq === 250 ? 1.414 : 1;
+
+            for (let i = 0; i < numPoints; i++) {
+                const t = (i / 50) + (timeStep * 0.5);
+                const x = cx + rx * Math.sin(w1 * t + lissajousPhaseVal);
+                const y = cy + ry * Math.sin(w2 * t);
+
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
+    </script>
+</body>
+</html>
