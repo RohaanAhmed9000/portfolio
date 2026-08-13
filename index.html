@@ -77,7 +77,12 @@
             margin-bottom: -0.45em;
             padding-right: 0.25em;
             margin-right: -0.25em;
+            /* Padding gives the reveal room to travel without clipping; the
+               matching negative margin keeps it out of the layout, so a line
+               that wraps inside a mask sits exactly as far from its neighbour
+               as one that sits in a mask of its own. */
             padding-top: 0.15em;
+            margin-top: -0.15em;
         }
 
         .reveal-up {
@@ -271,10 +276,11 @@
                 <span class="reveal-mask"><span class="reveal-up delay-200 text-[10px] font-bold tracking-[0.25em] uppercase text-empathy">Design Thinking & Philosophy</span></span>
             </div>
 
-            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[1.14] tracking-tight text-alabaster mb-10 max-w-5xl">
-                <span class="reveal-mask"><span class="reveal-up">Seeking to <span class="italic text-gradient-empathy">design & develop</span><br> 
-                    human-technology</span></span>
-                <span class="reveal-mask"><span class="reveal-up delay-100">interaction,</span></span><br>
+            <!-- One mask per visual line: a <br> inside a mask skips the descender
+                 padding, which is what made the first gap read tighter than the rest. -->
+            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.2] tracking-tight text-alabaster mb-10 max-w-5xl">
+                <span class="reveal-mask"><span class="reveal-up">Seeking to <span class="italic text-gradient-empathy">design &amp; develop</span></span></span><br>
+                <span class="reveal-mask"><span class="reveal-up delay-100">human-technology interaction,</span></span><br>
                 <span class="reveal-mask"><span class="reveal-up delay-200">directed by <span class="text-gradient-logic">purpose</span>.</span></span>
             </h1>
 
