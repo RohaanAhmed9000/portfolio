@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -191,6 +191,12 @@
             transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
         }
         .tab-btn:active, .freq-btn:active { transform: translateY(1px); }
+
+        /* The script owns in-page travel. Leaving CSS smooth scrolling on would
+           make the browser animate every single scroll step the script takes,
+           two animations fighting over one scrollbar — which is what turned a
+           click into a crawl. */
+        html { scroll-behavior: auto; }
 
         /* Anchors clear the fixed nav when jumped to */
         section[id], footer[id], article[id] { scroll-margin-top: 6rem; }
@@ -878,12 +884,25 @@
         }
 
         // 4. Eased in-page travel
-        //    Native smooth scrolling arrives abruptly; this decelerates into
-        //    the destination and scales its duration to the distance covered.
+        //
+        //    Motion the user asked for should leave immediately and slow into
+        //    place. An ease-IN-out curve starts at zero speed, which reads as a
+        //    dead beat between the click and anything happening — so this uses
+        //    ease-OUT, the JS twin of the cubic-bezier(0.19, 1, 0.22, 1) that
+        //    the rest of the page animates on.
         const NAV_OFFSET = 96;
 
-        function easeInOutCubic(t) {
-            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        function easeOutExpo(t) {
+            return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        }
+
+        let scrollAnimation = null;
+
+        function stopScrollAnimation() {
+            if (scrollAnimation) {
+                cancelAnimationFrame(scrollAnimation);
+                scrollAnimation = null;
+            }
         }
 
         function scrollToTarget(target) {
@@ -900,16 +919,26 @@
 
             if (reduceMotion) { window.scrollTo(0, destination); return; }
 
-            // Long journeys take longer, but never so long that they drag.
-            const duration = Math.min(1500, Math.max(700, Math.abs(distance) * 0.7));
+            stopScrollAnimation();
+
+            // Distance grows far faster than the time it should take, so the
+            // duration follows its square root: a short hop stays brisk and a
+            // full-page jump never turns into a journey.
+            const duration = Math.min(1200, Math.max(450, Math.sqrt(Math.abs(distance)) * 20));
             const began = performance.now();
 
             (function step(now) {
                 const progress = Math.min(1, (now - began) / duration);
-                window.scrollTo(0, start + distance * easeInOutCubic(progress));
-                if (progress < 1) requestAnimationFrame(step);
+                window.scrollTo(0, start + distance * easeOutExpo(progress));
+                scrollAnimation = progress < 1 ? requestAnimationFrame(step) : null;
             })(began);
         }
+
+        // Touching the wheel or the screen hands control straight back, so the
+        // page never fights the person using it.
+        ['wheel', 'touchstart'].forEach(evt =>
+            window.addEventListener(evt, stopScrollAnimation, { passive: true })
+        );
 
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a[href^="#"]');
